@@ -1,14 +1,16 @@
 util/LinesChecker.java
  util.LinesChecker
-NumbersTest.java
- NumbersTest
-util/RegexChecker.java
- util.RegexChecker
-BuzzChecker.java
- BuzzChecker
-util/Checker.java
- util.Checker
 util/UserProgram.java
  util.UserProgram
+util/RegexChecker.java
+ util.RegexChecker
 util/TextChecker.java
  util.TextChecker
+util/Checker.java
+ util.Checker
+NumberProperty.java
+ NumberProperty
+NumbersTest.java
+ NumbersTest
+PropertiesChecker.java
+ PropertiesChecker
