@@ -8,6 +8,11 @@ util/TextChecker.java
  util.TextChecker
 util/Checker.java
  util.Checker
+ListChecker.java
+ ListChecker
+Request.java
+ Request
+ Request$Parameter
 NumberProperty.java
  NumberProperty
 NumbersTest.java
