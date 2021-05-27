@@ -17,8 +17,9 @@ public class Main {
                 "- enter two natural numbers to obtain the properties of the list:\n" +
                 "  * the first parameter represents a starting number;\n" +
                 "  * the second parameters show how many consecutive numbers are to be processed;\n" +
+                "- two natural numbers and a property to search for;\n" +
                 "- separate the parameters with one space;\n" +
-                "- enter 0 to exit.\n");
+                "- enter 0 to exit.");
     }
 
     static void runProgram(){
@@ -116,7 +117,10 @@ public class Main {
     }
     static void processRequest(long input1, long input2, String filter){
         if (input1 > 0 && input2 > 0) {
-            printProperties(Objects.requireNonNull(filter(input1, input2, filter)));
+            long[] longs = filter(input1, input2, filter);
+            if (longs.length > 0){
+                printProperties(longs);
+            }
         }
         else if (input2 < 0 || input2 == 0){
             System.out.println("\nThe second parameter should be a natural number.");
@@ -177,7 +181,9 @@ public class Main {
                 default:
                     System.out.println("The property [" + filter.toUpperCase() + "] is wrong Available properties: " +
                             "[BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD]");
-                    return null;
+                    longs = new long[0];
+                    i =(int) input2;
+                    break;
             }
             input1++;
         }
