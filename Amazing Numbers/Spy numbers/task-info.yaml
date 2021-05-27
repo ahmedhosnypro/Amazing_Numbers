@@ -708,6 +708,31 @@ files:
         }
     }
   learner_created: false
+- name: src/numbers/Numbers.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/184/stages/935/implement#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #1
+
+    In this stage, a user can enter two numbers and a property to search for. The program should explain this in the help.
+
+    Please find below the output of your program during this failed test.
+
+    ---
+
+    Welcome to Amazing Numbers!
+
+    Supported requests:
+    - enter a natural number to know its properties;
+    - enter two natural numbers to obtain the properties of the list:
+      * the first parameter represents a starting number;
+      * the second parameters show how many consecutive numbers are to be processed;
+    - separate the parameters with one space;
+    - enter 0 to exit.
+
+    Enter a request:
+  time: Thu, 27 May 2021 01:23:03 UTC
 record: -1
