@@ -15,6 +15,8 @@ public enum NumberProperty implements LongPredicate {
     GAPFUL(number -> number >= 100 &&
             number % (getNumericValue(String.valueOf(number).charAt(0)) * 10L + number % 10) == 0),
     SPY(x -> digits(x).sum() == digits(x).reduce(1L, (a, b) -> a * b)),
+    SQUARE(number -> pow((long) Math.sqrt(number), 2) == number),
+    SUNNY(number -> NumberProperty.SQUARE.test(number + 1)),
     EVEN(x -> x % 2 == 0),
     ODD(x -> x % 2 != 0);
 
@@ -30,6 +32,14 @@ public enum NumberProperty implements LongPredicate {
 
     private static LongStream digits(long number) {
         return Long.toString(number).chars().mapToLong(Character::getNumericValue);
+    }
+
+    public static long pow(long n, long p) {
+        long result = 1;
+        for (long i = p; i > 0; --i) {
+            result *= n;
+        }
+        return result;
     }
 
     @Override
