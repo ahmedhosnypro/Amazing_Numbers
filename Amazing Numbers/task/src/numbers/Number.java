@@ -63,53 +63,82 @@ public class Number{
     static boolean isSunny(long value){
         return isSquare(value + 1L);
     }
-
+    static boolean isJumping (long value){
+        boolean isJumping = false;
+        if (value < 10){
+            isJumping = true;
+        }
+        else {
+            int n1 = 0;
+            int n2 = 0;
+            do {
+                n1 = (int) value % 10;
+                value /= 10;
+                n2 = (int) value % 10;
+                if ((n1 - n2 == 1) || (n2 - n1 == 1)) {
+                    isJumping = true;
+                }
+                else {
+                    isJumping = false;
+                    break;
+                }
+            }
+            while (value > 9);
+        }
+        return isJumping;
+    }
     static boolean filter(long num, String filter){
-        filter = filter.toLowerCase();
+        filter = filter.toUpperCase();
+        Property property = Property.valueOf(filter);
         boolean isFiltered = false;
-        switch (filter) {
-            case "even":
+        switch (property) {
+            case EVEN:
                 if (isEven(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "odd":
+            case ODD:
                 if (isOdd(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "buzz":
+            case BUZZ:
                 if (isBuzz(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "duck":
+            case DUCK:
                 if (isDuck(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "palindromic":
+            case PALINDROMIC:
                 if (isPalindromic(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "gapful":
+            case GAPFUL:
                 if (isGapful(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "spy":
+            case SPY:
                 if (isSpy(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "square":
+            case SQUARE:
                 if (isSquare(num)) {
                     isFiltered = true;
                 }
                 break;
-            case "sunny":
+            case SUNNY:
                 if (isSunny(num)) {
+                    isFiltered = true;
+                }
+                break;
+            case JUMPING:
+                if (isJumping(num)){
                     isFiltered = true;
                 }
                 break;

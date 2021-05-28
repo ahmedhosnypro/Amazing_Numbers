@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 import static numbers.Request.*;
+import static numbers.Print.printInstructions;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);

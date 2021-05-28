@@ -17,6 +17,17 @@ public enum NumberProperty implements LongPredicate {
     SPY(x -> digits(x).sum() == digits(x).reduce(1L, (a, b) -> a * b)),
     SQUARE(number -> pow((long) Math.sqrt(number), 2) == number),
     SUNNY(number -> NumberProperty.SQUARE.test(number + 1)),
+    JUMPING(number -> {
+        for (long previous = number % 10, rest = number / 10; rest > 0; rest /= 10) {
+            long current = rest % 10;
+            long delta = previous - current;
+            if (delta * delta != 1) {
+                return false;
+            }
+            previous = current;
+        }
+        return true;
+    }),
     EVEN(x -> x % 2 == 0),
     ODD(x -> x % 2 != 0);
 
