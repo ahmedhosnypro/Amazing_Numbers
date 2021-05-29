@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.function.LongPredicate;
 import java.util.regex.Pattern;
@@ -6,6 +7,8 @@ import java.util.stream.LongStream;
 import static java.lang.Character.getNumericValue;
 
 public enum NumberProperty implements LongPredicate {
+    EVEN(x -> x % 2 == 0),
+    ODD(x -> x % 2 != 0),
     BUZZ(x -> x % 7 == 0 || x % 10 == 7),
     DUCK(number -> digits(number).anyMatch(digit -> digit == 0)),
     PALINDROMIC(number -> {
@@ -28,8 +31,8 @@ public enum NumberProperty implements LongPredicate {
         }
         return true;
     }),
-    EVEN(x -> x % 2 == 0),
-    ODD(x -> x % 2 != 0);
+    HAPPY(NumberProperty::isHappy),
+    SAD(number -> !isHappy(number));
 
     private final LongPredicate hasProperty;
     private final Pattern pattern = Pattern.compile(
@@ -45,14 +48,6 @@ public enum NumberProperty implements LongPredicate {
         return Long.toString(number).chars().mapToLong(Character::getNumericValue);
     }
 
-    public static long pow(long n, long p) {
-        long result = 1;
-        for (long i = p; i > 0; --i) {
-            result *= n;
-        }
-        return result;
-    }
-
     @Override
     public boolean test(long number) {
         return hasProperty.test(number);
@@ -66,4 +61,28 @@ public enum NumberProperty implements LongPredicate {
                 .map(Boolean::valueOf);
     }
 
+    public static long pow(long n, long p) {
+        long result = 1;
+        for (long i = p; i > 0; --i) {
+            result *= n;
+        }
+        return result;
+    }
+
+    private static boolean isHappy(long number) {
+        final var sequence = new HashSet<Long>();
+        return LongStream
+                .iterate(number, i -> !sequence.contains(i), NumberProperty::happyNext)
+                .peek(sequence::add)
+                .anyMatch(i -> i == 1);
+    }
+
+    private static long happyNext(long number) {
+        long result = 0;
+        for (long i = number; i > 0; i /= 10) {
+            int digit = (int) (i % 10);
+            result += digit * digit;
+        }
+        return result;
+    }
 }

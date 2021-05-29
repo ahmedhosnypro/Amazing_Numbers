@@ -9,10 +9,11 @@ public class Print {
                 "- enter a natural number to know its properties;\n" +
                 "- enter two natural numbers to obtain the properties of the list:\n" +
                 "  * the first parameter represents a starting number;\n" +
-                "  * the second parameters show how many consecutive numbers are to be processed;\n" +
-                "- two natural numbers and two properties to search for;\n" +
+                "  * the second parameter shows how many consecutive numbers are to be processed;\n" +
+                "- two natural numbers and properties to search for;\n" +
+                "- a property preceded by minus must not be present in numbers;\n" +
                 "- separate the parameters with one space;\n" +
-                "- enter 0 to exit.\n");
+                "- enter 0 to exit.");
     }
     public static void printProperties(long input){
         System.out.println("Properties of " + input);
@@ -26,6 +27,8 @@ public class Print {
         System.out.println("\t\t" + "square: " + isSquare(input));
         System.out.println("\t\t" + "sunny: " + isSunny(input));
         System.out.println("\t\t" + "jumping: " + isJumping(input));
+        System.out.println("\t\t" + "happy: " + isHappy(input));
+        System.out.println("\t\t" + "sad: " + isSad(input));
         //System.out.println("\t\t" + ": " + );
     }
     public static void printProperties(long input1, long input2){
@@ -42,6 +45,8 @@ public class Print {
                     + (isSquare(input1) ? "square, " : "")
                     + (isSunny(input1) ? "sunny, " : "")
                     + (isJumping(input1) ? "jumping, " : "")
+                    + (isHappy(input1) ? "happy, " : "")
+                    + (isSad(input1) ? "sad, " : "")
             );
             input1++;
         }
@@ -60,6 +65,8 @@ public class Print {
                     + (isSquare(longs[i]) ? "square, " : "")
                     + (isSunny(longs[i]) ? "sunny, " : "")
                     + (isJumping(longs[i]) ? "jumping, " : "")
+                    + (isHappy(longs[i]) ? "happy, " : "")
+                    + (isSad(longs[i]) ? "sad, " : "")
             );
             longs[i]++;
         }

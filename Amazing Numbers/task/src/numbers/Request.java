@@ -53,7 +53,6 @@ public class Request {
         }
         return isContinue;
     }
-
     static String checkRequest(long input) {
         String check = "";
         if (input > 0) {
@@ -65,7 +64,6 @@ public class Request {
         }
         return check;
     }
-
     static String checkRequest(long input1, long input2) {
         String check = "";
         if (input1 > 0 && input2 > 0) {
@@ -79,7 +77,6 @@ public class Request {
         }
         return check;
     }
-
     static boolean processRequest(long input) {
         boolean isContinue = true;
         switch (checkRequest(input)) {
@@ -98,10 +95,8 @@ public class Request {
         }
         return isContinue;
     }
-
     static boolean processRequest(long input1, long input2) {
         boolean isContinue = true;
-
         switch (checkRequest(input1, input2)) {
             case "available":
                 printProperties(input1, input2);
@@ -121,7 +116,6 @@ public class Request {
 
         return isContinue;
     }
-
     static boolean processRequest(long input1, long input2, String[] filters) {
         boolean isContinue = true;
         switch (checkRequest(input1, input2)) {
@@ -143,7 +137,6 @@ public class Request {
         }
         return isContinue;
     }
-
     static void filterRequest(long input1, long input2, String[] filters) {
         String[] filteredProperties = checkProperty(filters);
         int cntWrong = 0;
@@ -163,10 +156,11 @@ public class Request {
                 }
             }
             if (cntWrong == 1) {
-                System.out.println("The property [" + wrongs[0] + "] is wrong.\n" +
-                        "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING]");
+                System.out.println("\nThe property [" + wrongs[0] + "] is wrong.\n" +
+                        "Available properties:\n" +
+                        "[EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
             } else {
-                System.out.print("The properties [");
+                System.out.print("\nThe properties [");
                 for (int i = 0; i < wrongs.length; i++) {
                     if (i == wrongs.length - 1) {
                         System.out.print(wrongs[i]);
@@ -174,93 +168,17 @@ public class Request {
                         System.out.print(wrongs[i] + ", ");
                 }
                 System.out.print("] are wrong.\n" +
-                        "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING]");
+                        "Available properties:\n" +
+                        "[EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
             }
-        }
-        else if (cntWrong == 0) {
-            //check for mutually
-            boolean isMutuallyExclusive = false;
+        } else if (cntWrong == 0) {
             Property[] properties = new Property[filteredProperties.length];
-            for (int i = 0; i < filters.length; i++) {
+            for (int i = 0; i < properties.length; i++) {
                 properties[i] = Property.valueOf(filteredProperties[i].toUpperCase());
             }
-            OuterFor:
-            for (Property property : properties) {
-                switch (property.ordinal()) {
-                    case 0:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 1) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + EVEN + ODD + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    case 1:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 0) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + EVEN + ODD + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    case 2:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 3) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + DUCK + SPY + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    case 3:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 2) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + DUCK + SPY + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    case 4:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 5) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + SQUARE + SUNNY + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    case 5:
-                        for (Property value : properties) {
-                            if (value.ordinal() == 4) {
-                                System.out.println("The request contains mutually exclusive properties: ["
-                                        + SQUARE + SUNNY + "]\n" +
-                                        "There are no numbers with these properties.");
-                                isMutuallyExclusive = true;
-                                break OuterFor;
-                            }
-                        }
-                        break;
-                    default:
-                        isMutuallyExclusive = false;
-                        break;
-                }
-            }
-            if (!isMutuallyExclusive) {
+            if (isMutuallyExclusive(properties));
+            else {
                 int i = 0;
-//                int cnt = 0;
                 long[] longs = new long[(int) input2];
                 while (i < input2) {
                     boolean b = true;

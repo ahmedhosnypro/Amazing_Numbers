@@ -87,6 +87,39 @@ public class Number{
         }
         return isJumping;
     }
+    static boolean isHappy(long value) {
+        boolean isHappy = false;
+        if (value == 1) {
+            isHappy = true;
+        }
+        else if (value == 2);
+        else {
+            long copy = value;
+            while (true) {
+                long products = 0;
+                do {
+                    long n = copy % 10;
+                    products += n * n;
+                    copy /= 10;
+                }
+                while (copy > 0);
+                if (products == 1) {
+                    isHappy = true;
+                    break;
+                }
+                else if (products == value || products == 2 || products == 4) {
+                    break;
+                }
+                else {
+                    copy = products;
+                }
+            }
+        }
+        return isHappy;
+    }
+    static boolean isSad(long value){
+        return !isHappy(value);
+    }
     static boolean filter(long num, String filter){
         filter = filter.toUpperCase();
         Property property = Property.valueOf(filter);
@@ -97,8 +130,18 @@ public class Number{
                     isFiltered = true;
                 }
                 break;
+            case NOTEVEN:
+                if (!isEven(num)) {
+                    isFiltered = true;
+                }
+                break;
             case ODD:
                 if (isOdd(num)) {
+                    isFiltered = true;
+                }
+                break;
+            case NOTODD:
+                if (!isOdd(num)) {
                     isFiltered = true;
                 }
                 break;
@@ -107,8 +150,18 @@ public class Number{
                     isFiltered = true;
                 }
                 break;
+            case NOTBUZZ:
+                if (!isBuzz(num)) {
+                    isFiltered = true;
+                }
+                break;
             case DUCK:
                 if (isDuck(num)) {
+                    isFiltered = true;
+                }
+                break;
+            case NOTDUCK:
+                if (!isDuck(num)) {
                     isFiltered = true;
                 }
                 break;
@@ -117,8 +170,18 @@ public class Number{
                     isFiltered = true;
                 }
                 break;
+            case NOTPALINDROMIC:
+                if (!isPalindromic(num)) {
+                    isFiltered = true;
+                }
+                break;
             case GAPFUL:
                 if (isGapful(num)) {
+                    isFiltered = true;
+                }
+                break;
+            case NOTGAPFUL:
+                if (!isGapful(num)) {
                     isFiltered = true;
                 }
                 break;
@@ -127,8 +190,18 @@ public class Number{
                     isFiltered = true;
                 }
                 break;
+            case NOTSPY:
+                if (!isSpy(num)) {
+                    isFiltered = true;
+                }
+                break;
             case SQUARE:
                 if (isSquare(num)) {
+                    isFiltered = true;
+                }
+                break;
+            case NOTSQUARE:
+                if (!isSquare(num)) {
                     isFiltered = true;
                 }
                 break;
@@ -137,9 +210,39 @@ public class Number{
                     isFiltered = true;
                 }
                 break;
+            case NOTSUNNY:
+                if (!isSunny(num)){
+                    isFiltered = true;
+                }
+                break;
+            case HAPPY:
+                if (isHappy(num)){
+                    isFiltered = true;
+                }
+                break;
+            case NOTHAPPY:
+                if (!isHappy(num)){
+                    isFiltered = true;
+                }
+                break;
+            case SAD:
+                if (isSad(num)){
+                    isFiltered = true;
+                }
+                break;
+            case NOTSAD:
+                if (!isSad(num)){
+                    isFiltered = true;
+                }
+                break;
             case JUMPING:
                 if (isJumping(num)){
-                    isFiltered = true;
+                    isFiltered =true;
+                }
+                break;
+            case NOTJUMPING:
+                if (!isJumping(num)){
+                    isFiltered =true;
                 }
                 break;
             default:
